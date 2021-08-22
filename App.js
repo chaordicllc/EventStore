@@ -37,7 +37,7 @@ var putEvent = function(typeId, eventJson) {
       }).catch(err => {
         console.log(err) 
       }).finally(() => {
-        incrementNextId()
+        incrementNextId(typeId)
         release()
       });
 
@@ -45,7 +45,7 @@ var putEvent = function(typeId, eventJson) {
 }
 
 var determineEventFileName = function(typeId, eventJson) {
-    return eventJson.Type + '_' + eventJson.Action + '_' + getNextId(typeId) //uuid.generate() + '_' + eventJson.Object
+    return typeId + '_' + eventJson.Action + '_' + getNextId(typeId) //uuid.generate() + '_' + eventJson.Object
 }
 
 var getNextId = function(typeId) {
@@ -75,7 +75,8 @@ var incrementNextId = function(typeId) {
 
 app.post('/events', function (request, response, next) {
     console.log(request.body)
-    putEvent(request.query.typeId, request.body)
+    var typeId = request.body.Type
+    putEvent(typeId, request.body)
     response.send()
 });
 
