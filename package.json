@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "async-mutex": "^0.3.1",
+    "aws-sdk": "^2.973.0",
+    "express": "^4.17.1",
+    "megahash": "^1.0.5"
+  }
+}
